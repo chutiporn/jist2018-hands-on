@@ -30,7 +30,7 @@ SELECT ?date (xsd:decimal(?org_asset) as ?asset) (xsd:decimal(?org_liab) as ?lia
     <%URI%> l4a-fin:data ?financial_data.
     ?financial_data l4a-fin:date ?org_date .
     ?financial_data l4a-fin:asset ?org_asset .
-    ?financial_data l4a-fin:asset ?org_liab .
+    ?financial_data l4a-fin:liab ?org_liab .
     BIND(strbefore(?org_date,"T") as ?date)
 } ORDER BY (?date)
     `
