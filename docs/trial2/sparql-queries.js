@@ -26,11 +26,12 @@ function getSPARQL002()
     var sparql_query = `
 PREFIX l4a-fin: <http://lod4all.net/ontology/financial/>
 
-SELECT ?date (xsd:decimal(?org_asset) as ?asset) (xsd:decimal(?org_liab) as ?liab) WHERE {
+SELECT ?date ?insolvency WHERE {
     <%URI%> l4a-fin:data ?financial_data.
     ?financial_data l4a-fin:date ?org_date .
-    ?financial_data l4a-fin:asset ?org_asset .
-    ?financial_data l4a-fin:liab ?org_liab .
+    ?financial_data l4a-fin:asset ?asset .
+    ?financial_data l4a-fin:liab ?liab.
+    BIND(xsd:decimal(xsd:decimal(?asset) - xsd:decimal(?liab)) as ?insolvency).
     BIND(strbefore(?org_date,"T") as ?date)
 } ORDER BY (?date)
     `
